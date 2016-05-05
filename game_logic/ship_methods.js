@@ -1,3 +1,5 @@
+
+
 function checkForShip(player, coordinates) {
     var shipPresent, ship;
 
@@ -14,7 +16,19 @@ function checkForShip(player, coordinates) {
         }
     }   // for loop close
 
-    return false;                           // if the for loop never returns a true result, none of the ships have been hit... 
+    return false;                           // if the for loop never returns a true result, none of the ships have been hit...
 }
 
+
+function damageShip(ship, coordinates) {
+    ship.damage.push(coordinates);
+}
+
+
+
+
+
+
+
 module.exports.checkForShip = checkForShip;
+module.exports.damageShip = damageShip;
