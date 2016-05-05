@@ -9,13 +9,12 @@ function checkForShip(player, coordinates) {
             return (actualCoordinate[0] === coordinates[0]) && (actualCoordinate[1] === coordinates[1]);        // if the callback returns true, that item gets pushed into the shipPresent-array
         })[0];                                                                                                  // [0] here specifies only the first index of the item being pushed. (that is enough to serve in the conditional next...)
 
-        if (!shipPresent) {                 // now if anything got pushed into the shipPresent-array by the filter() the if-condition will evaluate as false, and checkForShip will return true.
-            return false;                   // Our ship_test expects checkForShip to return false
-        } else {
-            return true;
+        if (shipPresent) {                 // now if anything got pushed into the shipPresent-array by the filter() the if-condition will evaluate as true, and checkForShip will return true.
+            return true;                   // Our ship_test.js file expects checkForShip to return true for a matching coordinate.
         }
     }   // for loop close
 
+    return false;                           // if the for loop never returns a true result, none of the ships have been hit... 
 }
 
 module.exports.checkForShip = checkForShip;

@@ -38,7 +38,28 @@ describe('checkForShip', function() {
       expect(checkForShip(player, [9, 9])).to.be.false;
   });
 
+  // ************** spec 04: **************** //
+  it('should handle checking multiple ships', function() {
 
+      player = {                                // we need to supply a dummy-player-object here for the test to run...
+          ships: [
+              {
+                  locations: [ [0, 0], [0, 1] ]
+              },
+              {
+                  locations: [ [3, 0], [3, 1] ]
+              }
+          ]
+      };
+
+      expect(checkForShip(player, [0, 1])).to.be.true;
+      expect(checkForShip(player, [0, 0])).to.be.true;
+
+      expect(checkForShip(player, [3, 0])).to.be.true;
+      expect(checkForShip(player, [3, 1])).to.be.true;
+
+      expect(checkForShip(player, [9, 9])).to.be.false;
+  });
 
 
 
