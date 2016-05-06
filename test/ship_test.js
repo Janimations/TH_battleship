@@ -93,3 +93,39 @@ describe('damageShip', function(){
     });
 
 });     // describe close
+
+
+/*============================================
+     Suite for testing Fire :
+============================================*/
+
+describe('fire', function(){
+
+    // Ship method:
+    var fire = require('../game_logic/ship_methods').fire;
+
+// ************** spec 01: **************** //
+    it('should register damage on a players ship at a given location', function() {
+
+        player1 = {
+            ships: [
+                {
+                    locations: [ [0, 0], [0, 1] ],
+                    damage: []
+                },
+                {
+                    locations: [ [3, 0], [3, 1] ],
+                    damage: []
+                }
+            ]
+        };
+
+
+        // call fire() to "create" damage:
+        fire(player1, [0, 0]);
+
+        expect(player1.ships[0].damage[0]).to.deep.equal([0, 0]);
+
+    });
+
+});     // describe close
