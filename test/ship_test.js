@@ -12,56 +12,63 @@ describe('checkForShip', function() {
   // ************** spec 01: **************** //
   it('should correctly report no ship at a given players coordinate', function() {
 
-      player = {                                // we need to supply a dummy-player here for the test to run...
-          ships: [ { locations: [ [0, 0] ] } ]
+      player1 = {                                // we need to supply a dummy-player1 here for the test to run...
+          ships: [
+              {
+                  locations: [ [0, 0] ],
+                  damage: []
+              }
+          ]
       };
 
-      expect(checkForShip(player, [9, 9])).to.be.false;
+      expect(checkForShip(player1, [9, 9])).to.be.false;
   });
 
   // ************** spec 02: **************** //
   it('should correctly report a ship at the given coordinates', function() {
 
-      player = {                                // we need to supply a dummy-player-object here for the test to run...
-          ships: [ { locations: [ [0, 0] ] } ]
+      player1 = {                                // we need to supply a dummy-player1-object here for the test to run...
+          ships: [ { locations: [ [0, 0] ], damage: []} ]
       };
 
-      expect(checkForShip(player, [0, 0])).to.be.true;
+      expect(checkForShip(player1, [0, 0])).to.be.true;
   });
 
   // ************** spec 03: **************** //
   it('should handle ships located at more than one coordinate', function() {
 
-      player = {                                // we need to supply a dummy-player-object here for the test to run...
-          ships: [ { locations: [ [0, 0], [0, 1] ] } ]
+      player1 = {                                // we need to supply a dummy-player1-object here for the test to run...
+          ships: [ { locations: [ [0, 0], [0, 1] ], damage: []} ]
       };
 
-      expect(checkForShip(player, [0, 1])).to.be.true;
-      expect(checkForShip(player, [0, 0])).to.be.true;
-      expect(checkForShip(player, [9, 9])).to.be.false;
+      expect(checkForShip(player1, [0, 1])).to.be.true;
+      expect(checkForShip(player1, [0, 0])).to.be.true;
+      expect(checkForShip(player1, [9, 9])).to.be.false;
   });
 
   // ************** spec 04: **************** //
   it('should handle checking multiple ships', function() {
 
-      player = {                                // we need to supply a dummy-player-object here for the test to run...
+      player1 = {                                // we need to supply a dummy-player1-object here for the test to run...
           ships: [
               {
-                  locations: [ [0, 0], [0, 1] ]
+                  locations: [ [0, 0], [0, 1] ],
+                  damage: []
               },
               {
-                  locations: [ [3, 0], [3, 1] ]
+                  locations: [ [3, 0], [3, 1] ],
+                  damage: []
               }
           ]
       };
 
-      expect(checkForShip(player, [0, 1])).to.be.true;
-      expect(checkForShip(player, [0, 0])).to.be.true;
+      expect(checkForShip(player1, [0, 1])).to.be.true;
+      expect(checkForShip(player1, [0, 0])).to.be.true;
 
-      expect(checkForShip(player, [3, 0])).to.be.true;
-      expect(checkForShip(player, [3, 1])).to.be.true;
+      expect(checkForShip(player1, [3, 0])).to.be.true;
+      expect(checkForShip(player1, [3, 1])).to.be.true;
 
-      expect(checkForShip(player, [9, 9])).to.be.false;
+      expect(checkForShip(player1, [9, 9])).to.be.false;
   });
 
 });     // describe close
@@ -89,6 +96,57 @@ describe('damageShip', function(){
         damageShip(ship, [0, 0]);           // this will push the coordinates into the damage-array
 
         expect(ship.damage).not.to.be.empty;
+        expect(ship.damage[0]).to.deep.equal([0, 0]);
+    });
+
+});     // describe close
+
+/*============================================
+     Suite for testing "fire" method:
+         (using checkForShip)
+          (using damageShip)
+============================================*/
+
+describe('fire', function(){
+
+    // Ship methods:
+    var fireOnShip = require('../game_logic/ship_methods').fireOnShip;
+
+
+// ************** spec 01: **************** //
+    it('should check if a set of coordinates causes any damage to a players ships', function() {
+
+        // 2 player1-objects needed to simulate/test the fire-method:
+        player1 = {
+            ships: [
+                {
+                    locations: [ [0, 0], [0, 1] ],
+                    damage: []
+                },
+                {
+                    locations: [ [2, 0], [2, 1] ],
+                    damage: []
+                }
+            ]
+        };
+
+        player2 = {
+            ships: [
+                {
+                    locations: [ [3, 0], [3, 1] ],
+                    damage: []
+                },
+                {
+                    locations: [ [4, 0], [4, 1] ],
+                    damage: []
+                }
+            ]
+        };
+
+        // call fire() to "create" damage:
+        fireOnShip(player1, [0, 0]);
+
+        expect(player1.ships[0].damage).not.to.be.empty;
 
     });
 
