@@ -113,7 +113,7 @@ describe('fire', function(){
     var fireOnShip = require('../game_logic/ship_methods').fireOnShip;
 
 
-// ************** spec 01: **************** //
+// ************** fire spec 01: **************** //
     it('should check if a set of coordinates causes any damage to a players ships', function() {
 
         // 2 player1-objects needed to simulate/test the fire-method:
@@ -145,8 +145,50 @@ describe('fire', function(){
 
         // call fire() to "create" damage:
         fireOnShip(player1, [0, 0]);
+        fireOnShip(player2, [4, 1]);
 
         expect(player1.ships[0].damage).not.to.be.empty;
+        expect(player2.ships[1].damage).not.to.be.empty;
+
+    });
+
+
+    // ************** fire spec 02: **************** //
+    it('should check if a ship can record multiple hits', function() {
+
+        // 2 player1-objects needed to simulate/test the fire-method:
+        player1 = {
+            ships: [
+                {
+                    locations: [ [0, 0], [0, 1] ],
+                    damage: []
+                },
+                {
+                    locations: [ [2, 0], [2, 1] ],
+                    damage: []
+                }
+            ]
+        };
+
+        player2 = {
+            ships: [
+                {
+                    locations: [ [3, 0], [3, 1] ],
+                    damage: []
+                },
+                {
+                    locations: [ [4, 0], [4, 1], [4, 2] ],
+                    damage: []
+                }
+            ]
+        };
+
+        // call fire() to "create" damage:
+        fireOnShip(player2, [4, 2]);
+        fireOnShip(player2, [4, 1]);
+
+        // ecpectation:
+        expect(player2.ships[1].damage.length).to.be.equal(2);
 
     });
 
