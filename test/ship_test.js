@@ -112,6 +112,10 @@ describe('fire', function(){
         };
     })
 
+    after(function() {
+        console.log('***** All Tests completet *****');
+    })
+
 // ************** fire spec 01: **************** //
     it('should register damage on a players ship at a given location', function() {
 
