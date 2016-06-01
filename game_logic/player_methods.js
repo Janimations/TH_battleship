@@ -1,10 +1,13 @@
-var checkForShip = require('./ship_methods.js').checkForShip;
+var checkForShip = require('./ship_methods.js').checkForShip;       // this "imports" the checkForShip function from the ship_methods module file
+
+//***********************************************//
+// checks if coordinates occupied by a ship and weather they are valid numbers 0 - 9
 
 function validateLocation (player, coordinates) {
   var x = coordinates[0];
   var y = coordinates[1];
 
-  var spaceAvailable = !checkForShip(player, coordinates);
+  var spaceAvailable = !checkForShip(player, coordinates);          // if checkForShip finds no "hit" and returns false, this will make spaceAvailable = true
 
   if ((x <= 9 && x >= 0) && (y <= 9 && y >= 0)) {
     return spaceAvailable; // decides whether this valid space is occupied
@@ -13,12 +16,19 @@ function validateLocation (player, coordinates) {
   }
 }
 
-function validateLocations (player, locations) {
-  var validated = locations.map(function (location) {
+//***********************************************//
+
+function validateLocations (player, locations) {            // ??? locations ???
+
+  var validated = locations.map(function (location) {       // validated is an array of boolean values (true if validateLocation() (and checkForShip inside that) can't find a hit)
     return validateLocation(player, location);
   });
-  return validated.indexOf(false) === -1;
+
+  return validated.indexOf(false) === -1;                   // if no "false" is found in validated array, indexOf will return -1 and the comparison evaluates to true.
 }
+
+
+//***********************************************//
 
 function placeShip (player, ship, startingCoordinates, direction) {
   var proposedLocations = [];
@@ -26,7 +36,7 @@ function placeShip (player, ship, startingCoordinates, direction) {
     rowNumber,
     columnNumber;
 
-  for (var i = 0; i < ship.size; i++) {
+  for (var i = 0; i < ship.length; i++) {
     previousLocation = proposedLocations[i - 1] || [];
     rowNumber = previousLocation[0];
     columnNumber = previousLocation[1];
@@ -44,6 +54,8 @@ function placeShip (player, ship, startingCoordinates, direction) {
     return false;
   }
 }
+
+//***********************************************//
 
 module.exports = {
   placeShip: placeShip,

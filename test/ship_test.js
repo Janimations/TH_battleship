@@ -33,7 +33,8 @@ describe('checkForShip', function() {
   // ************** spec 02: **************** //
   it('should correctly report a ship at the given coordinates', function() {
 
-      expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);      // ships[0] works as a path!     NOT player.ships.locations[0]
+      expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);      // player.ships[0] returns the WHOLE ship, and so does checkForShip if it's a hit.
+                                                                                // deep.equal checks over and compares the whole array-object
   });
 
   // ************** spec 03: **************** //
