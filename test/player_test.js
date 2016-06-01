@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
 
 describe('PLAYER METHODS', function () {
+
+/**********************************************/
   describe('validateLocation', function () {
     var validateLocation = require('../game_logic/player_methods.js').validateLocation;
     var player;
@@ -38,6 +40,7 @@ describe('PLAYER METHODS', function () {
     });
   });
 
+/**********************************************/
   describe('validateLocations', function () {
     var validateLocations = require('../game_logic/player_methods.js').validateLocations;
     var player;
@@ -66,6 +69,7 @@ describe('PLAYER METHODS', function () {
     });
   });
 
+/**********************************************/
   describe('placeShip', function () {
     var placeShip = require('../game_logic/player_methods.js').placeShip;
     var player;

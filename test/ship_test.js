@@ -114,7 +114,11 @@ describe('fire', function(){
     })
 
     after(function() {
-        console.log('***** All Tests completet *****');
+        console.log('***** All Ship Tests completed *****');
+    })
+
+    afterEach(function() {
+        console.log('======== One Ship Test complete =========');
     })
 
 // ************** fire spec 01: **************** //

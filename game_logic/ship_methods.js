@@ -1,4 +1,4 @@
-
+/**********************************************/
 
 function checkForShip(player, coordinates) {
     var shipPresent, ship;
@@ -20,19 +20,24 @@ function checkForShip(player, coordinates) {
     return false;                           // if the for loop never returns a true result, none of the ships have been hit...
 }
 
+/**********************************************/
+// is used by fire()
 
 function damageShip(ship, coordinates) {
     ship.damage.push(coordinates);
 }
 
+/**********************************************/
+
 function fire(player, coordinates) {
-    var ship = checkForShip(player, coordinates);
+    var ship = checkForShip(player, coordinates);   // checkForShip returns a whole ship-object if coordinates are a hit, else false
 
     if (ship) {
         damageShip(ship, coordinates);
     }
 }
 
+/**********************************************/
 
 module.exports.checkForShip = checkForShip;
 module.exports.damageShip = damageShip;
@@ -46,16 +51,19 @@ module.exports.fire = fire;
 player = {
     ships: [
         {
-            locations: [ [0, 0], [0, 1] ]
+            size: 1,
+            locations: [ [0, 0],      // locations get filled in by placeShip() in player_methods.js module
+            damage: []
         },
         {
-            locations: [ [3, 0], [3, 1] ]
+            size: 2,
+            locations: [ [3, 0], [3, 1] ],
+            damage: []
         }
     ]
 };
 
-Notation Example:
-
-player.ships[0].locations[1][1] = 1
+Notes:
+damageShip() pushes coordinates of hits to that ships "damage"-array
 
 */

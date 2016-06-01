@@ -36,16 +36,18 @@ function placeShip (player, ship, startingCoordinates, direction) {
     rowNumber,
     columnNumber;
 
-  for (var i = 0; i < ship.length; i++) {
-    previousLocation = proposedLocations[i - 1] || [];
+  for (var i = 0; i < ship.size; i++) {                     // this for loop accumulates coordinates in the proposedLocations-array
+    previousLocation = proposedLocations[i - 1] || [];      // index []
     rowNumber = previousLocation[0];
     columnNumber = previousLocation[1];
 
-    proposedLocations[i] = (i === 0)
-      ? startingCoordinates
-      : (direction === 'horizontal')
-        ? [rowNumber, ++columnNumber]
-        : [++rowNumber, columnNumber];
+    // (Conditional if-else) Ternary Operator:
+
+    proposedLocations[i] = (i === 0)            // if: i is the first index in proposedLocations-array
+      ? startingCoordinates                     // use startingcoordinates as index[0]
+      : (direction === 'horizontal')            // else if: direction is 'horizontal'
+        ? [rowNumber, ++columnNumber]           // assign this coordinate to the index[i] of proposedLocations (increasing only the column-coordinate)
+        : [++rowNumber, columnNumber];          // else assign this coordinate to index[i]... 
   }
 
   if (validateLocations(player, proposedLocations)) {
