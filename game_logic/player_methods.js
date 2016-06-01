@@ -31,6 +31,8 @@ function validateLocations (player, locations) {            // ??? locations ???
 //***********************************************//
 
 function placeShip (player, ship, startingCoordinates, direction) {
+    if (!direction) throw Error('You left out the direction!');
+
   var proposedLocations = [];
   var previousLocation,
     rowNumber,
@@ -47,7 +49,7 @@ function placeShip (player, ship, startingCoordinates, direction) {
       ? startingCoordinates                     // use startingcoordinates as index[0]
       : (direction === 'horizontal')            // else if: direction is 'horizontal'
         ? [rowNumber, ++columnNumber]           // assign this coordinate to the index[i] of proposedLocations (increasing only the column-coordinate)
-        : [++rowNumber, columnNumber];          // else assign this coordinate to index[i]... 
+        : [++rowNumber, columnNumber];          // else assign this coordinate to index[i]...
   }
 
   if (validateLocations(player, proposedLocations)) {
