@@ -74,22 +74,15 @@ function getRandomDirection() {
       : 'vertical';                               // else "vertical"
 }
 
-//***********************************************//
-function computerFire (player) {
-  var coordinates = getRandomCoordinates(9);
-  fire(player, coordinates);
-}
+/***********************************************
+EXAMPLE:
+computerFire and computerPlaceShip are not really needed once random-Direction and random-Coordinates get generated
+separately. Now fire() and placeShip() can be used by either human or computer players:
 
-//***********************************************//
-function computerPlaceShip (player, ship) {
+fire(computerPlayer, getRandomCoordinates());
+placeShip(computerPlayer, computerPlayer.ship[0], getRandomCoordinates(), getRandomDirection());
 
-  var startingCoordinates = getRandomCoordinates(9);
-  var direction = getRandomDirection();
-
-  placeShip(player, ship, startingCoordinates, direction);  // creates and updates (writes to) coordinates for that player's ship...
-}
-
-
+*************************************************/
 
 module.exports = {
   placeShip: placeShip,
