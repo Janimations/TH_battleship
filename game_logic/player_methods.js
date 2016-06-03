@@ -19,7 +19,7 @@ function validateLocation (player, coordinates) {
 
 //***********************************************//
 
-function validateLocations (player, locations) {            // ??? locations ???
+function validateLocations (player, locations) {            
 
   var validated = locations.map(function (location) {       // validated is an array of boolean values (true if validateLocation() (and checkForShip inside that) can't find a hit)
     return validateLocation(player, location);

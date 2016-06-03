@@ -3,142 +3,144 @@ var expect = require('chai').expect;
 /*============================================
      Suite for testing Ship Position:
 ============================================*/
+describe('SHIP TESTS', function() {
 
-describe('checkForShip', function() {
+    describe('checkForShip', function() {
 
-  // Ship-methods:
-  var checkForShip = require('../game_logic/ship_methods').checkForShip;    // "imports" the checkForShip function
-  var player;
+      // Ship-methods:
+      var checkForShip = require('../game_logic/ship_methods').checkForShip;    // "imports" the checkForShip function
+      var player;
 
-  before(function (){
-      player = {                                // we need to supply a dummy-player here for the test to run...
-          ships: [
-              {
-                  locations: [ [0, 0], [0, 1] ]
-              },
-              {
-                  locations: [ [3, 0], [3, 1] ]
-              }
-          ]
-      };
-  })
-
-
-  // ************** spec 01: **************** //
-  it('should correctly report no ship at a given players coordinate', function() {
-
-      expect(checkForShip(player, [9, 9])).to.be.false;
-  });
-
-  // ************** spec 02: **************** //
-  it('should correctly report a ship at the given coordinates', function() {
-
-      expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);      // player.ships[0] returns the WHOLE ship, and so does checkForShip if it's a hit.
-                                                                                // deep.equal checks over and compares the whole array-object
-  });
-
-  // ************** spec 03: **************** //
-  it('should handle ships located at more than one coordinate', function() {
-
-      expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
-      expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
-      expect(checkForShip(player, [9, 9])).to.be.false;
-  });
-
-  // ************** spec 04: **************** //
-  it('should handle checking multiple ships', function() {
-
-      expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
-      expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
-
-      expect(checkForShip(player, [3, 0])).to.deep.equal(player.ships[1]);
-      expect(checkForShip(player, [3, 1])).to.deep.equal(player.ships[1]);
-
-      expect(checkForShip(player, [9, 9])).to.be.false;
-  });
-
-});     // describe close
+      before(function (){
+          player = {                                // we need to supply a dummy-player here for the test to run...
+              ships: [
+                  {
+                      locations: [ [0, 0], [0, 1] ]
+                  },
+                  {
+                      locations: [ [3, 0], [3, 1] ]
+                  }
+              ]
+          };
+      })
 
 
-/*============================================
-     Suite for testing Ship Damage:
-============================================*/
+      // ************** spec 01: **************** //
+      it('should correctly report no ship at a given players coordinate', function() {
 
-describe('damageShip', function(){
+          expect(checkForShip(player, [9, 9])).to.be.false;
+      });
 
-    // Ship method:
-    var damageShip = require('../game_logic/ship_methods').damageShip;
+      // ************** spec 02: **************** //
+      it('should correctly report a ship at the given coordinates', function() {
 
-// ************** spec 01: **************** //
-    it('should register damage on a given ship at a given location', function() {
+          expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);      // player.ships[0] returns the WHOLE ship, and so does checkForShip if it's a hit, so deep.equal works
+                                                                                    // deep.equal checks over and compares the whole array-object
+      });
 
-        // ship-object needed to run the test (and to inform how to build ships later!)
-        var ship = {
-            locations: [[0, 0]],
-            damage: []
-        };
+      // ************** spec 03: **************** //
+      it('should handle ships located at more than one coordinate', function() {
 
-        // run function to "create" damage:
-        damageShip(ship, [0, 0]);           // this will push the coordinates into the damage-array
+          expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
+          expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
+          expect(checkForShip(player, [9, 9])).to.be.false;
+      });
 
-        expect(ship.damage).not.to.be.empty;
+      // ************** spec 04: **************** //
+      it('should handle checking multiple ships', function() {
 
-    });
+          expect(checkForShip(player, [0, 1])).to.deep.equal(player.ships[0]);
+          expect(checkForShip(player, [0, 0])).to.deep.equal(player.ships[0]);
 
-});     // describe close
+          expect(checkForShip(player, [3, 0])).to.deep.equal(player.ships[1]);
+          expect(checkForShip(player, [3, 1])).to.deep.equal(player.ships[1]);
+
+          expect(checkForShip(player, [9, 9])).to.be.false;
+      });
+
+    });     // describe close
 
 
-/*============================================
-     Suite for testing Fire :
-============================================*/
+    /*============================================
+         Suite for testing Ship Damage:
+    ============================================*/
 
-describe('fire', function(){
+    describe('damageShip', function(){
 
-    // Ship method:
-    var fire = require('../game_logic/ship_methods').fire;
-    var player;
+        // Ship method:
+        var damageShip = require('../game_logic/ship_methods').damageShip;
 
-    beforeEach(function () {
-        player1 = {
-            ships: [
-                {
-                    locations: [ [0, 0], [0, 1] ],
-                    damage: []
-                },
-                {
-                    locations: [ [3, 0], [3, 1] ],
-                    damage: []
-                }
-            ]
-        };
-    })
+    // ************** spec 01: **************** //
+        it('should register damage on a given ship at a given location', function() {
 
-    after(function() {
-        console.log('***** All Ship Tests completed *****');
-    })
+            // ship-object needed to run the test (and to inform how to build ships later!)
+            var ship = {
+                locations: [[0, 0]],
+                damage: []
+            };
 
-    afterEach(function() {
-        console.log('======== One Ship Test complete =========');
-    })
+            // run function to "create" damage:
+            damageShip(ship, [0, 0]);           // this will push the coordinates into the damage-array
 
-// ************** fire spec 01: **************** //
-    it('should register damage on a players ship at a given location', function() {
+            expect(ship.damage).not.to.be.empty;
 
-        // call fire() to "create" damage:
-        fire(player1, [0, 0]);
+        });
 
-        expect(player1.ships[0].damage[0]).to.deep.equal([0, 0]);
+    });     // describe close
 
-    });
 
-// ************** fire spec 02: **************** //
-    it('should NOT register damage if there is no ship a given location', function() {
+    /*============================================
+         Suite for testing Fire :
+    ============================================*/
 
-        // call fire() to "create" damage:
-        fire(player1, [9, 9]);
+    describe('fire', function(){
 
-        expect(player1.ships[0].damage).to.be.empty;
+        // Ship method:
+        var fire = require('../game_logic/ship_methods').fire;
+        var player;
 
-    });
+        beforeEach(function () {
+            player1 = {
+                ships: [
+                    {
+                        locations: [ [0, 0], [0, 1] ],
+                        damage: []
+                    },
+                    {
+                        locations: [ [3, 0], [3, 1] ],
+                        damage: []
+                    }
+                ]
+            };
+        })
 
-});     // describe close
+        after(function() {
+            console.log('***** All Ship Tests completed *****');
+        })
+
+        afterEach(function() {
+            console.log('======== One Ship Test complete =========');
+        })
+
+    // ************** fire spec 01: **************** //
+        it('should register damage on a players ship at a given location', function() {
+
+            // call fire() to "create" damage:
+            fire(player1, [0, 0]);
+
+            expect(player1.ships[0].damage[0]).to.deep.equal([0, 0]);
+
+        });
+
+    // ************** fire spec 02: **************** //
+        it('should NOT register damage if there is no ship a given location', function() {
+
+            // call fire() to "create" damage:
+            fire(player1, [9, 9]);
+
+            expect(player1.ships[0].damage).to.be.empty;
+
+        });
+
+    });     // inner 'describe' close
+});     // outer 'describe' close

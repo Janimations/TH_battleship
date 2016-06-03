@@ -11,7 +11,7 @@ describe('PLAYER METHODS', function () {
         player = {
             ships: [
                 {
-                    locations: [[1, 1]],
+                    locations: [[9, 9]],
                     damage: []
                 }
             ]
@@ -26,8 +26,8 @@ describe('PLAYER METHODS', function () {
     });
 
     it('should confirm INvalid for occupied locations in range', function () {
-      var location = [1, 1];
-      var actual = validateLocation(player, location);
+      var coordinates = [9, 9];
+      var actual = validateLocation(player, coordinates);
 
       expect(actual).to.be.false;
     });
@@ -117,4 +117,4 @@ describe('PLAYER METHODS', function () {
     });
 
   });
-});
+});     // outer 'describe' close

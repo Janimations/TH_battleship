@@ -4,7 +4,7 @@ function checkForShip(player, coordinates) {
     var shipPresent, ship;
 
     for (var i = 0; i < player.ships.length; i++) {
-        ship = player.ships[i];             // loops through all ships
+        ship = player.ships[i];             // loops through all the players ships
 
         // filter() loops over all points in ship.locations and returns an array into shipPresent if anything matches...
         shipPresent = ship.locations.filter( function(actualCoordinate) {                                       // filter() checks for a matching value and returns an array of all matching items. So shipPresent becomes an array.
