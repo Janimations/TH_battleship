@@ -58,7 +58,7 @@ function placeShip (player, ship, startingCoordinates, direction) {
   } else {
     return false;
   }
-}
+};
 
 //***********************************************//
 function getRandomCoordinates(range){
@@ -87,5 +87,7 @@ placeShip(computerPlayer, computerPlayer.ship[0], getRandomCoordinates(9), getRa
 module.exports = {
   placeShip: placeShip,
   validateLocations: validateLocations,
-  validateLocation: validateLocation
-};
+  validateLocation: validateLocation,
+  getRandomDirection: getRandomDirection,
+  getRandomCoordinates: getRandomCoordinates
+  };
