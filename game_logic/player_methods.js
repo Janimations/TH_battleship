@@ -69,7 +69,7 @@ function getRandomCoordinates(range){
 //***********************************************//
 function getRandomDirection() {
 
-  return = Math.random() > 0.5           // if Math.random > 0.5, 'horizontal' gets stored in the "direction" variable...
+  return Math.random() > 0.5           // if Math.random > 0.5, 'horizontal' is returned
       ? 'horizontal'
       : 'vertical';                               // else "vertical"
 }
@@ -79,15 +79,13 @@ EXAMPLE:
 computerFire and computerPlaceShip are not really needed once random-Direction and random-Coordinates get generated
 separately. Now fire() and placeShip() can be used by either human or computer players:
 
-fire(computerPlayer, getRandomCoordinates());
-placeShip(computerPlayer, computerPlayer.ship[0], getRandomCoordinates(), getRandomDirection());
+fire(computerPlayer, getRandomCoordinates(9));
+placeShip(computerPlayer, computerPlayer.ship[0], getRandomCoordinates(9), getRandomDirection());
 
 *************************************************/
 
 module.exports = {
   placeShip: placeShip,
   validateLocations: validateLocations,
-  validateLocation: validateLocation,
-  computerPlaceShip: computerPlaceShip,
-  computerFire: computerFire
+  validateLocation: validateLocation
 };
