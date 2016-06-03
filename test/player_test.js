@@ -8,13 +8,14 @@ describe('PLAYER METHODS', function () {
     var player;
 
     beforeEach(function () {
-      player = {
-        ships: [
-          {
-            locations: [[9, 9]]
-          }
-        ]
-      };
+        player = {
+            ships: [
+                {
+                    locations: [[1, 1]],
+                    damage: []
+                }
+            ]
+        };
     });
 
     it('should confirm valid for unoccupied locations in range', function () {
@@ -25,7 +26,7 @@ describe('PLAYER METHODS', function () {
     });
 
     it('should confirm INvalid for occupied locations in range', function () {
-      var location = [9, 9];
+      var location = [1, 1];
       var actual = validateLocation(player, location);
 
       expect(actual).to.be.false;
@@ -49,7 +50,8 @@ describe('PLAYER METHODS', function () {
       player = {
         ships: [
           {
-            locations: [[0, 0]]
+            locations: [[0, 0]],
+            damage: []
           }
         ]
       };
@@ -62,10 +64,10 @@ describe('PLAYER METHODS', function () {
 
     it('should correctly report a a problem if any location in the list is invalid', function () {
       var locations = [[1, 1], [1, 2], [1, 3], [10, 10]];
-      expect(validateLocations(player, locations)).to.be.false;
+      expect(validateLocations(player, locations)).to.be.false;         // false because [10, 10] are invalid coords
 
       locations = [[1, 1], [1, 2], [1, 3], [0, 0]];
-      expect(validateLocations(player, locations)).to.be.false;
+      expect(validateLocations(player, locations)).to.be.false;         // false because [0, 0] is occupied
     });
   });
 
@@ -79,11 +81,13 @@ describe('PLAYER METHODS', function () {
         ships: [
           {
             size: 1,
-            locations: []
+            locations: [],
+            damage: []
           },
           {
             size: 2,
-            locations: [[1, 0], [1, 1]]
+            locations: [[1, 0], [1, 1]],
+            damage: []
           }
         ]
       };
@@ -114,28 +118,3 @@ describe('PLAYER METHODS', function () {
 
   });
 });
-
-// /**********************************************/
-// describe('COMPUTER PLAYER', function () {
-//   describe('computerFire', function () {
-//     var computerFire = require('../game_logic/player_methods').computerFire;
-//     var player;
-//
-//     beforeEach(function () {
-//       player = {
-//         ships: [
-//           {
-//             locations: [[9, 9]]
-//           }
-//         ]
-//       };
-//     });
-//
-//     it('should aim at a random location', function () {
-//       var ship = player.ships[0];
-//
-//       computerFire(player,);
-// //      expect(ship).to.......
-//     });
-//   });
-// });

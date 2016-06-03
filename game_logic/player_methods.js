@@ -8,10 +8,10 @@ function validateLocation (player, coordinates) {
   var x = coordinates[0];
   var y = coordinates[1];
 
-  var spaceAvailable = !checkForShip(player, coordinates);          // if checkForShip finds no "hit" and returns false, this will make spaceAvailable = true
+  var spaceAvailable = !checkForShip(player, coordinates);          // if checkForShip finds no "hit" and returns false, the ! will make spaceAvailable = true
 
   if ((x <= 9 && x >= 0) && (y <= 9 && y >= 0)) {
-    return spaceAvailable; // decides whether this valid space is occupied
+    return spaceAvailable;
   } else {
     return false;
   }
@@ -48,7 +48,7 @@ function placeShip (player, ship, startingCoordinates, direction) {
 
     proposedLocations[i] = (i === 0)            // if: i is the first index in proposedLocations-array
       ? startingCoordinates                     // use startingcoordinates as index[0]
-      : (direction === 'horizontal')            // else if: direction is 'horizontal'
+      : (direction === 'horizontal')            // else (it means we are already starting to place a ship) if: direction is 'horizontal'
         ? [rowNumber, ++columnNumber]           // assign this coordinate to the index[i] of proposedLocations (increasing only the column-coordinate)
         : [++rowNumber, columnNumber];          // else assign this coordinate to index[i]...
   }
@@ -61,10 +61,11 @@ function placeShip (player, ship, startingCoordinates, direction) {
 };
 
 //***********************************************//
-function getRandomCoordinates(range){
-    var x = Math.floor(Math.random() * range);
-    var y = Math.floor(Math.random() * range);
+function getRandomCoordinates(){
+    var x = Math.floor(Math.random() * 9);
+    var y = Math.floor(Math.random() * 9);
     return [x, y];
+}
 
 //***********************************************//
 function getRandomDirection() {
@@ -84,10 +85,8 @@ placeShip(computerPlayer, computerPlayer.ship[0], getRandomCoordinates(9), getRa
 
 *************************************************/
 
-module.exports = {
-  placeShip: placeShip,
-  validateLocations: validateLocations,
-  validateLocation: validateLocation,
-  getRandomDirection: getRandomDirection,
-  getRandomCoordinates: getRandomCoordinates
-  };
+module.exports.placeShip = placeShip;
+module.exports.validateLocation = validateLocation;
+module.exports.validateLocations = validateLocations;
+module.exports.getRandomDirection = getRandomDirection;
+module.exports.getRandomCoordinates = getRandomCoordinates;

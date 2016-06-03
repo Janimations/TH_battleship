@@ -18,14 +18,16 @@ function checkForShip(player, coordinates) {
     }   // for loop close
 
     return false;                           // if the for loop never returns a true result, none of the ships have been hit...
-}
+};
+
 
 /**********************************************/
 // is used by fire()
 
 function damageShip(ship, coordinates) {
     ship.damage.push(coordinates);
-}
+};
+
 
 /**********************************************/
 
@@ -35,7 +37,9 @@ function fire(player, coordinates) {
     if (ship) {
         damageShip(ship, coordinates);
     }
-}
+};
+
+
 
 /**********************************************/
 

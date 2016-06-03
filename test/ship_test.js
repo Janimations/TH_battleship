@@ -131,14 +131,14 @@ describe('fire', function(){
 
     });
 
-    // ************** fire spec 02: **************** //
-        it('should NOT register damage if there is no ship a given location', function() {
+// ************** fire spec 02: **************** //
+    it('should NOT register damage if there is no ship a given location', function() {
 
-            // call fire() to "create" damage:
-            fire(player1, [9, 9]);
+        // call fire() to "create" damage:
+        fire(player1, [9, 9]);
 
-            expect(player1.ships[0].damage).to.be.empty;
+        expect(player1.ships[0].damage).to.be.empty;
 
-        });
+    });
 
 });     // describe close
