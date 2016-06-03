@@ -1,4 +1,5 @@
 var checkForShip = require('./ship_methods.js').checkForShip;       // this "imports" the checkForShip function from the ship_methods module file
+var checkForShip = require('./ship_methods.js').fire;
 
 //***********************************************//
 // checks if coordinates occupied by a ship and weather they are valid numbers 0 - 9
@@ -60,9 +61,40 @@ function placeShip (player, ship, startingCoordinates, direction) {
 }
 
 //***********************************************//
+function getRandomCoordinates(range){
+    var x = Math.floor(Math.random() * range);
+    var y = Math.floor(Math.random() * range);
+    return [x, y];
+
+//***********************************************//
+function getRandomDirection() {
+
+  return = Math.random() > 0.5           // if Math.random > 0.5, 'horizontal' gets stored in the "direction" variable...
+      ? 'horizontal'
+      : 'vertical';                               // else "vertical"
+}
+
+//***********************************************//
+function computerFire (player) {
+  var coordinates = getRandomCoordinates(9);
+  fire(player, coordinates);
+}
+
+//***********************************************//
+function computerPlaceShip (player, ship) {
+
+  var startingCoordinates = getRandomCoordinates(9);
+  var direction = getRandomDirection();
+
+  placeShip(player, ship, startingCoordinates, direction);  // creates and updates (writes to) coordinates for that player's ship...
+}
+
+
 
 module.exports = {
   placeShip: placeShip,
   validateLocations: validateLocations,
   validateLocation: validateLocation,
+  computerPlaceShip: computerPlaceShip,
+  computerFire: computerFire
 };

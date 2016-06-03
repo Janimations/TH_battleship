@@ -105,11 +105,37 @@ describe('PLAYER METHODS', function () {
         var ship = player.ships[0];
         var coordinates = [0, 1];
 
-        var handler = function (){
+        var handler = function (){                  // to test for the error it needs to be stored in a variable...
             placeShip(player, ship, coordinates)
         }
         expect(handler).to.throw(Error);         // the ".to.throw(Error)" syntax is chai specific code.
+        expect(handler).to.throw('You left out the direction!');
     });
 
+  });
+});
+
+/**********************************************/
+describe('COMPUTER PLAYER', function () {
+  describe('computerFire', function () {
+    var computerFire = require('../game_logic/player_methods').computerFire;
+    var player;
+
+    beforeEach(function () {
+      player = {
+        ships: [
+          {
+            locations: [[9, 9]]
+          }
+        ]
+      };
+    });
+
+    it('should aim at a random location', function () {
+      var ship = player.ships[0];
+
+      computerFire(player,);
+//      expect(ship).to.......
+    });
   });
 });
