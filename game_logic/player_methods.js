@@ -3,15 +3,16 @@ var checkForShip = require('./ship_methods.js').fire;
 
 //***********************************************//
 // checks if coordinates occupied by a ship and weather they are valid numbers 0 - 9
+// ccordinates are always in the format [x, y]
 
 function validateLocation (player, coordinates) {
   var x = coordinates[0];
   var y = coordinates[1];
 
-  var spaceAvailable = !checkForShip(player, coordinates);          // if checkForShip finds no "hit" and returns false, the ! will make spaceAvailable = true
+  var spaceAvailable = !checkForShip(player, coordinates);          // if checkForShip finds no "hit" and returns false, this will make spaceAvailable = true
 
   if ((x <= 9 && x >= 0) && (y <= 9 && y >= 0)) {
-    return spaceAvailable;
+    return spaceAvailable; // decides whether this valid space is occupied
   } else {
     return false;
   }
@@ -19,7 +20,7 @@ function validateLocation (player, coordinates) {
 
 //***********************************************//
 
-function validateLocations (player, locations) {            
+function validateLocations (player, locations) {            // ??? locations ???
 
   var validated = locations.map(function (location) {       // validated is an array of boolean values (true if validateLocation() (and checkForShip inside that) can't find a hit)
     return validateLocation(player, location);
@@ -48,7 +49,7 @@ function placeShip (player, ship, startingCoordinates, direction) {
 
     proposedLocations[i] = (i === 0)            // if: i is the first index in proposedLocations-array
       ? startingCoordinates                     // use startingcoordinates as index[0]
-      : (direction === 'horizontal')            // else (it means we are already starting to place a ship) if: direction is 'horizontal'
+      : (direction === 'horizontal')            // else if: direction is 'horizontal'
         ? [rowNumber, ++columnNumber]           // assign this coordinate to the index[i] of proposedLocations (increasing only the column-coordinate)
         : [++rowNumber, columnNumber];          // else assign this coordinate to index[i]...
   }
