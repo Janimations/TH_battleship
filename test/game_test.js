@@ -66,9 +66,9 @@ describe('GAME INSTANCE FUNCTIONS', function() {
 
         saveGame(function() {
           status = 'game saved!';   // this is the code that is called after setTimeout has waited 1000ms
+          done();
 
           expect(status).to.equal('game saved!');   // moved inside the callback and below the previous line, so that the expectation passes
-          done();
         });
 
       });  // it close
